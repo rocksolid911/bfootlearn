@@ -1,3 +1,4 @@
+import 'package:bfootlearn/Home/widgets/crad_option.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -10,15 +11,19 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.teal.shade800,
+          backgroundColor: Colors.black,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: const [
              CircleAvatar(
-               radius: 20,
-               backgroundImage: AssetImage('assets/images/logo.png'),
+               radius: 23,
+               backgroundColor: Colors.white,
+               child: CircleAvatar(
+                 radius: 20,
+                 backgroundImage: AssetImage('assets/person_2.jpg'),
+               ),
              ),
               SizedBox(width: 10,),
               Text('Bfootlearn',style: TextStyle(color: Colors.white),),
@@ -49,7 +54,9 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.pushNamed(context, '/leaderboard')
+                  },
 
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(160, 50),
@@ -67,7 +74,9 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(width: 10,),
                 ElevatedButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.pushNamed(context, '/discussion')
+                  },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(160, 50),
                         shape: RoundedRectangleBorder(
@@ -114,18 +123,8 @@ class _CradSliderState extends State<CradSlider> with SingleTickerProviderStateM
         children: [
           CarouselSlider.builder(
             itemCount: 2,
-            itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) => Center(
-              child: Container(
-                height: 650,
-                width: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                ),
-                child: Center(child: Text(itemIndex.toString())),
-              ),
-
-            ),
+            itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                CardOption(option: itemIndex == 0 ?"Vocabulary":"Sentence",),
             options: CarouselOptions(
               height: 300,
               autoPlay: true,
@@ -165,3 +164,4 @@ class _CradSliderState extends State<CradSlider> with SingleTickerProviderStateM
     );
   }
 }
+
